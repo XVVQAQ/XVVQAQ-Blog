@@ -1,0 +1,170 @@
+---
+type Heading = { depth: number; slug: string; text: string };
+
+interface Props {
+    headings: Heading[];
+    minDepth?: number;
+    maxDepth?: number;
+    title?: string;
+    includeH1?: boolean;
+}
+
+const {
+    headings,
+    minDepth = 2,
+    maxDepth = 3,
+    title = "On this page",
+    includeH1 = false,
+} = Astro.props;
+
+const filtered = (headings ?? []).filter((h) => {
+    if (!includeH1 && h.depth === 1) return false;
+    return h.depth >= minDepth && h.depth <= maxDepth;
+});
+---
+
+{
+    filtered.length > 0 && (
+        <nav class="toc" aria-label="Table of contents">
+            <div class="toc-title">{title}</div>
+            <ol class="toc-list">
+                {filtered.map((h) => (
+                    <li class={`toc-item toc-item-d${h.depth}`}>
+                        <a
+                            class="toc-link"
+                            href={`#${h.slug}`}
+                            data-slug={h.slug}
+                        >
+                            {h.text}
+                        </a>
+                    </li>
+                ))}
+            </ol>
+        </nav>
+    )
+}
+
+<script is:inline>
+    function initTOC() {
+        const tocLinks = document.querySelectorAll(".toc-link");
+        if (tocLinks.length === 0) return;
+
+        let activeHeading = null;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        activeHeading = entry.target.id;
+                        updateActiveTOC();
+                    }
+                });
+            },
+            {
+                rootMargin: "-100px 0px -66% 0px",
+                threshold: [0, 1],
+            },
+        );
+
+        function updateActiveTOC() {
+            tocLinks.forEach((link) => {
+                const slug = link.getAttribute("data-slug");
+                if (slug === activeHeading) {
+                    link.classList.add("active");
+                } else {
+                    link.classList.remove("active");
+                }
+            });
+        }
+
+        tocLinks.forEach((link) => {
+            const slug = link.getAttribute("data-slug");
+            const heading = document.getElementById(slug);
+            if (heading) {
+                observer.observe(heading);
+            }
+        });
+
+        // 初始化时设置第一个为激活状态
+        if (tocLinks.length > 0 && !activeHeading) {
+            const firstSlug = tocLinks[0].getAttribute("data-slug");
+            activeHeading = firstSlug;
+            updateActiveTOC();
+        }
+    }
+
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initTOC);
+    } else {
+        initTOC();
+    }
+</script>
+
+<style>
+    .toc {
+        padding: 1rem;
+        background: var(--bg-color);
+        height: fit-content;
+        min-width: 200px;
+        transition: background-color 0.3s;
+    }
+
+    @media (max-width: 1024px) {
+        .toc {
+            display: none;
+        }
+    }
+
+    .toc-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+        opacity: 0.85;
+    }
+
+    .toc-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 0.25rem;
+    }
+
+    .toc-link {
+        display: inline-block;
+        text-decoration: none;
+        color: var(--text-color);
+        opacity: 0.85;
+        line-height: 1.35;
+        padding: 0.15rem 0.25rem;
+        border-radius: 0.4rem;
+        border-left: 2px solid transparent;
+        padding-left: 0.5rem;
+        transition:
+            opacity 0.2s,
+            background-color 0.2s,
+            border-color 0.2s;
+    }
+
+    .toc-link:hover {
+        opacity: 1;
+        background: var(--border-color);
+    }
+
+    .toc-link.active {
+        opacity: 1;
+        border-left-color: oklch(70.4% 0.191 22.216);
+        color: oklch(70.4% 0.191 22.216);
+    }
+
+    .toc-item-d2 {
+        padding-left: 0rem;
+    }
+    .toc-item-d3 {
+        padding-left: 0.75rem;
+    }
+    .toc-item-d4 {
+        padding-left: 1.5rem;
+    }
+</style>

@@ -1,0 +1,222 @@
+---
+interface Props {
+    prevUrl?: string;
+    nextUrl?: string;
+    currentPage: number;
+    totalPages: number;
+}
+
+const { prevUrl, nextUrl, currentPage, totalPages } = Astro.props;
+
+function generatePageNumbers(
+    current: number,
+    total: number,
+): (number | string)[] {
+    const pages: (number | string)[] = [];
+
+    if (total <= 7) {
+        for (let i = 1; i <= total; i++) {
+            pages.push(i);
+        }
+    } else {
+        pages.push(1);
+
+        if (current > 3) {
+            pages.push("...");
+        }
+
+        const start = Math.max(2, current - 1);
+        const end = Math.min(total - 1, current + 1);
+
+        for (let i = start; i <= end; i++) {
+            pages.push(i);
+        }
+
+        if (current < total - 2) {
+            pages.push("...");
+        }
+
+        pages.push(total);
+    }
+
+    return pages;
+}
+
+const pageNumbers = generatePageNumbers(currentPage, totalPages);
+
+function getPageUrl(pageNum: number): string {
+    if (pageNum === 1) {
+        return "/";
+    }
+    return `/${pageNum}/`;
+}
+---
+
+<nav class="pagination" aria-label="Pagination">
+    <a
+        href={prevUrl}
+        class="pagination-btn"
+        class:disabled={!prevUrl}
+        aria-label="Previous page"
+        aria-disabled={!prevUrl}
+    >
+        <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+    </a>
+
+    <div class="pagination-numbers">
+        {
+            pageNumbers.map((page) => {
+                if (page === "...") {
+                    return <span class="pagination-ellipsis">...</span>;
+                }
+
+                const pageNum = page as number;
+                const isActive = pageNum === currentPage;
+
+                return (
+                    <a
+                        href={getPageUrl(pageNum)}
+                        class="pagination-number"
+                        class:active={isActive}
+                        aria-label={`Page ${pageNum}`}
+                        aria-current={isActive ? "page" : undefined}
+                    >
+                        {pageNum}
+                    </a>
+                );
+            })
+        }
+    </div>
+
+    <a
+        href={nextUrl}
+        class="pagination-btn"
+        class:disabled={!nextUrl}
+        aria-label="Next page"
+        aria-disabled={!nextUrl}
+    >
+        <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+        >
+            <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+    </a>
+</nav>
+
+<style scoped>
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 1.5rem;
+        padding: 0.5rem 0;
+        --pagination-border: #d3d3d3;
+        --pagination-size: 2.4rem;
+    }
+
+    .pagination > * {
+        border: 2px solid var(--pagination-border);
+        margin-left: -2px;
+    }
+    .pagination > *:first-child {
+        margin-left: 0;
+    }
+
+    .pagination-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0;
+        padding: 0;
+        width: var(--pagination-size);
+        height: var(--pagination-size);
+        background-color: transparent;
+        color: var(--text-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s;
+        font-size: 0.95rem;
+        position: relative;
+    }
+
+    .pagination-btn:hover:not(.disabled) {
+        background-color: var(--text-color);
+        color: var(--bg-color);
+        z-index: 1;
+    }
+
+    .pagination-btn.disabled {
+        color: #b0b0b0;
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+    .pagination-btn.disabled svg {
+        stroke: currentColor;
+    }
+
+    .pagination-numbers {
+        display: flex;
+        border: none !important;
+        margin: 0 !important;
+    }
+
+    .pagination-number,
+    .pagination-ellipsis {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: var(--pagination-size);
+        height: var(--pagination-size);
+        padding: 0;
+        background-color: transparent;
+        color: var(--text-color);
+        text-decoration: none;
+        border-top: 2px solid var(--pagination-border);
+        border-bottom: 2px solid var(--pagination-border);
+        border-left: 2px solid var(--pagination-border);
+        border-right: none;
+        font-weight: 500;
+        transition: all 0.2s;
+        margin: 0;
+        margin-left: -2px;
+        font-size: 0.95rem;
+    }
+
+    .pagination-number:first-child,
+    .pagination-ellipsis:first-child {
+        margin-left: 0;
+    }
+
+    .pagination-number:last-child,
+    .pagination-ellipsis:last-child {
+        border-right: 2px solid var(--pagination-border);
+    }
+
+    .pagination-number:hover {
+        background-color: var(--text-color);
+        color: var(--bg-color);
+        z-index: 1;
+    }
+
+    .pagination-number.active {
+        background-color: var(--text-color);
+        color: var(--bg-color);
+        cursor: default;
+        z-index: 1;
+    }
+</style>

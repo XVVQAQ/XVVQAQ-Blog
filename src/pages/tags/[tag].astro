@@ -1,0 +1,80 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import PostCard from "@/components/PostCard.astro";
+import { getTagIndex, getPostsByTagKey, tagSlugToKey } from "@/utils/content";
+
+export async function getStaticPaths() {
+    const tags = await getTagIndex();
+    return tags.map((t) => ({
+        params: { tag: t.slug },
+        props: { tagKey: t.key, tagLabel: t.label, count: t.count },
+    }));
+}
+
+const { tag: tagSlug } = Astro.params;
+const { tagKey, tagLabel, count } = Astro.props as {
+    tagKey: string;
+    tagLabel: string;
+    count: number;
+};
+
+const resolvedKey = tagKey ?? tagSlugToKey(tagSlug ?? "");
+const resolvedLabel = tagLabel ?? tagSlugToKey(tagSlug ?? "");
+const posts = await getPostsByTagKey(resolvedKey);
+---
+
+<Layout
+    pageTitle={`#${resolvedLabel}`}
+    pageDescription={`Posts tagged with ${resolvedLabel}`}
+    data-pagefind-ignore
+>
+    <div class="tag-page">
+        <div class="tag-header">
+            <h1>#{resolvedLabel}</h1>
+            <p class="tag-meta">{count ?? posts.length} posts</p>
+            <a class="back" href="/posts">Back to posts</a>
+        </div>
+
+        {posts.length === 0 ? (
+            <p>No posts found for this tag.</p>
+        ) : (
+            <div class="post-list">
+                {posts.map((post) => (
+                    <PostCard {...post.data} id={post.id} />
+                ))}
+            </div>
+        )}
+    </div>
+</Layout>
+
+<style>
+    .tag-header {
+        display: flex;
+        align-items: baseline;
+        flex-wrap: wrap;
+        gap: 0.75rem 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .tag-header h1 {
+        margin: 0;
+    }
+
+    .tag-meta {
+        margin: 0;
+        opacity: 0.7;
+    }
+
+    .back {
+        margin-left: auto;
+        text-decoration: none;
+        color: var(--text-color);
+        opacity: 0.8;
+        transition: color 0.2s;
+    }
+
+    .back:hover {
+        color: var(--link-color);
+        opacity: 1;
+    }
+</style>

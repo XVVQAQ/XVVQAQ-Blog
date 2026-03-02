@@ -1,0 +1,196 @@
+---
+import TagList from "@/components/Misc/TagList.astro";
+
+interface Props {
+    title: string;
+    description: string;
+    pubDate: Date;
+    updatedDate?: Date;
+    id: string;
+    pin?: number;
+    tags?: string[];
+}
+
+const {
+    title,
+    description,
+    pubDate,
+    updatedDate,
+    pin,
+    id,
+    tags = [],
+} = Astro.props;
+---
+
+<article
+    class="post-card"
+    transition:name={`post-${id}`}
+    data-post-href={`/posts/${id}`}
+    role="link"
+    tabindex="0"
+    aria-label={`打开文章：${title}`}
+>
+    <h2>
+        <a href={`/posts/${id}`}>{title}</a>
+    </h2>
+    <p>{description}</p>
+    <TagList tags={tags} />
+    <div class="dates">
+        <small class="date-item">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+            >
+                <g fill="none">
+                    <path
+                        fill="currentColor"
+                        d="M2 9c0-1.886 0-2.828.586-3.414S4.114 5 6 5h12c1.886 0 2.828 0 3.414.586S22 7.114 22 9c0 .471 0 .707-.146.854C21.707 10 21.47 10 21 10H3c-.471 0-.707 0-.854-.146C2 9.707 2 9.47 2 9m0 9c0 1.886 0 2.828.586 3.414S4.114 22 6 22h12c1.886 0 2.828 0 3.414-.586S22 19.886 22 18v-5c0-.471 0-.707-.146-.854C21.707 12 21.47 12 21 12H3c-.471 0-.707 0-.854.146C2 12.293 2 12.53 2 13z"
+                    ></path>
+                    <path
+                        stroke="currentColor"
+                        stroke-linecap="round"
+                        stroke-width="2"
+                        d="M7 3v3m10-3v3"></path>
+                </g>
+            </svg>
+            发布: {pubDate.toLocaleDateString()}
+        </small>
+        {
+            updatedDate && (
+                <small class="date-item">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                    >
+                        <path
+                            fill="currentColor"
+                            d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m4.2 14.2L11 13V7h1.5v5.2l4.5 2.7z"
+                        />
+                    </svg>
+                    更新: {updatedDate.toLocaleDateString()}
+                </small>
+            )
+        }
+    </div>
+    {
+        pin && (
+            <span class="pin-badge">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        fill="currentColor"
+                        d="m21.5 9.1l-6.6-6.6l-4.2 5.6c-1.2-.1-2.4.1-3.6.7c-.1 0-.1.1-.2.1q-.75.45-1.2.9l3.7 3.7l-5.7 5.7v1.1h1.1l5.7-5.7l3.7 3.7q.6-.6.9-1.2c.1-.1.1-.2.2-.3c.6-1.1.8-2.4.6-3.6zm-7.3 3.5l.1.9c.1.9 0 1.8-.4 2.6l-6-6c.8-.4 1.7-.5 2.6-.4l.9.1L15 4.9L19.1 9z"
+                    />
+                </svg>
+            </span>
+        )
+    }
+</article>
+
+<script type="module" is:inline>
+    import { navigate } from "astro:transitions/client";
+
+    document.addEventListener("astro:page-load", () => {
+        if (window.__postCardNavBound) return;
+        window.__postCardNavBound = true;
+
+        document.addEventListener("click", (ev) => {
+            const card = ev.target?.closest?.(".post-card[data-post-href]");
+            if (!card) return;
+
+            if (
+                ev.target.closest("a, button, input, textarea, select, summary")
+            )
+                return;
+
+            navigate(card.dataset.postHref);
+        });
+
+        document.addEventListener("keydown", (ev) => {
+            if (ev.key !== "Enter" && ev.key !== " ") return;
+            const card = document.activeElement?.closest?.(
+                ".post-card[data-post-href]",
+            );
+            if (!card) return;
+            ev.preventDefault();
+            navigate(card.dataset.postHref);
+        });
+    });
+</script>
+
+<style>
+    .post-card {
+        position: relative;
+        border: 1px solid var(--border-color);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 8px;
+        background-color: var(--bg-color);
+        transition:
+            background-color 0.3s,
+            border-color 0.3s;
+        cursor: pointer;
+    }
+
+    .post-card h2 {
+        margin-bottom: 0.5rem;
+        margin-top: 0;
+        color: var(--text-color);
+    }
+
+    .post-card p {
+        color: var(--text-color);
+    }
+
+    .post-card a {
+        text-decoration: none;
+        color: var(--text-color);
+        transition: color 0.2s;
+    }
+
+    .post-card a:hover {
+        color: var(--link-color);
+    }
+
+    .post-card:focus-visible {
+        outline: 2px solid oklch(70.4% 0.191 22.216);
+        outline-offset: 3px;
+    }
+
+    .dates {
+        display: flex;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    .date-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+        color: var(--text-color);
+        opacity: 0.8;
+    }
+
+    .date-item svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .pin-badge {
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 0.8rem;
+        margin: 0.5rem;
+        display: inline-block;
+        color: var(--text-color);
+    }
+</style>

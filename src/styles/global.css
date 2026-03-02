@@ -1,0 +1,89 @@
+:root {
+    --bg-color: #ffffff;
+    --text-color: #333333;
+    --header-bg: #f8f8f8;
+    --border-color: #ddd;
+    --link-color: #007bff;
+    --link-hover-color: #0056b3;
+    --code-bg: #f6f8fa;
+    --code-border: #d0d7de;
+    --scrollbar-size: 10px;
+    --scrollbar-track: #f0f0f0;
+    --scrollbar-thumb: #b5b5b5;
+    --scrollbar-thumb-hover: #9e9e9e;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --header-bg: #2d2d2d;
+    --border-color: #444;
+    --link-color: #4da3ff;
+    --link-hover-color: #80bdff;
+    --code-bg: #0f172a;
+    --code-border: #334155;
+    --scrollbar-track: #1f1f1f;
+    --scrollbar-thumb: #5a5a5a;
+    --scrollbar-thumb-hover: #777777;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    scroll-behavior: smooth;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition:
+        background-color 0.3s,
+        color 0.3s;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    height: var(--scrollbar-size);
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 999px;
+    border: 2px solid var(--scrollbar-track);
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+}
+
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner {
+    background: var(--scrollbar-track);
+}
+
+main {
+    display: flex;
+    margin: 1rem 0;
+    padding: 0 1rem;
+    width: 100%;
+    max-width: 48rem;
+    flex-direction: column;
+}

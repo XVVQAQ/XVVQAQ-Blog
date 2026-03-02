@@ -1,0 +1,42 @@
+---
+import { type CollectionEntry, getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import TOC from "@/components/Widgets/TOC.astro";
+import PostHeader from "@/components/Misc/PostHeader.astro";
+import "@/styles/markdown.css";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+    return posts.map((post) => ({
+        params: { slug: post.id },
+        props: post,
+    }));
+}
+type Props = CollectionEntry<"blog">;
+
+const post = Astro.props;
+
+const { Content, headings } = await render(post);
+---
+
+<Layout
+    pageTitle={post.data.title}
+    pageDescription={post.data.description}
+    tags={post.data.tags}
+>
+    <aside class="spacer" slot="LSide"></aside>
+    <article class="post-content">
+        <PostHeader
+            title={post.data.title || "Post Not Found"}
+            pubDate={post.data.pubDate}
+            updatedDate={post.data.updatedDate}
+            description={post.data.description}
+            tags={post.data.tags}
+            transitionKey={post.id}
+        />
+        <Content />
+    </article>
+    <aside class="toc-sidebar" slot="RSide">
+        <TOC headings={headings} title={post.data.title} />
+    </aside>
+</Layout>

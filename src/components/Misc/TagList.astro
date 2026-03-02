@@ -1,0 +1,76 @@
+---
+import { tagLabelToSlug } from "@/utils/content";
+
+interface Props {
+    tags?: string[];
+}
+
+const { tags = [] } = Astro.props;
+const uniqueTags = [...new Set(tags.filter((t) => typeof t === "string"))]
+    .map((t) => t.trim())
+    .filter(Boolean);
+---
+
+{
+    uniqueTags.length > 0 && (
+        <div class="tag-list" aria-label="Tags">
+            {uniqueTags.map((tag) => (
+                <a class="tag" href={`/tags/${tagLabelToSlug(tag)}`}>
+                    #{tag}
+                </a>
+            ))}
+        </div>
+    )
+}
+
+<style>
+    .tag-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin: 0.5rem 0 0.75rem;
+    }
+
+    .tag {
+        --tag-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        padding: 0.15rem 0.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: var(--tag-radius);
+        position: relative;
+        text-decoration: none;
+        color: var(--text-color);
+        opacity: 0.85;
+        transition:
+            border-color 0.2s,
+            color 0.2s,
+            opacity 0.2s;
+        font-size: 0.9rem;
+    }
+
+    .tag::after {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border: 1px dashed
+            color-mix(in oklab, var(--link-color) 70%, transparent);
+        border-radius: calc(var(--tag-radius) + 4px);
+        opacity: 0;
+        transform: scale(0.96);
+        transition:
+            opacity 0.22s ease,
+            transform 0.22s ease;
+        pointer-events: none;
+    }
+
+    .tag:hover {
+        opacity: 1;
+    }
+
+    .tag:hover::after,
+    .tag:focus-visible::after {
+        opacity: 1;
+        transform: scale(1);
+    }
+</style>
