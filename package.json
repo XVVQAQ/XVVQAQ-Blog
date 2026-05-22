@@ -9,11 +9,11 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^4.3.13",
-    "@astrojs/rss": "^4.0.15",
-    "@astrojs/sitemap": "^3.7.0",
-    "@astrojs/svelte": "^7.2.5",
-    "astro": "^5.17.1",
+    "@astrojs/mdx": "^5.0.6",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
+    "@astrojs/svelte": "^8.1.1",
+    "astro": "^6.3.7",
     "rehype-accessible-emojis": "^0.3.2",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-external-links": "^3.0.0",
@@ -21,13 +21,13 @@
     "remark-directive": "^4.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "svelte": "^5.50.2",
+    "svelte": "^5.55.9",
     "typescript": "^5.9.3"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^7.3.0",
-    "eslint": "^10.0.0",
-    "pagefind": "^1.4.0",
+    "@antfu/eslint-config": "^7.7.3",
+    "eslint": "^10.4.0",
+    "pagefind": "^1.5.2",
     "unplugin-icons": "^23.0.1"
   }
 }
