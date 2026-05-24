@@ -49,28 +49,8 @@ const uniqueTags = [...new Set(tags.filter((t) => typeof t === "string"))]
         font-size: 0.9rem;
     }
 
-    .tag::after {
-        content: "";
-        position: absolute;
-        inset: -4px;
-        border: 1px dashed
-            color-mix(in oklab, var(--link-color) 70%, transparent);
-        border-radius: calc(var(--tag-radius) + 4px);
-        opacity: 0;
-        transform: scale(0.96);
-        transition:
-            opacity 0.22s ease,
-            transform 0.22s ease;
-        pointer-events: none;
-    }
-
     .tag:hover {
         opacity: 1;
-    }
-
-    .tag:hover::after,
-    .tag:focus-visible::after {
-        opacity: 1;
-        transform: scale(1);
+        background: var(--border-color);
     }
 </style>
