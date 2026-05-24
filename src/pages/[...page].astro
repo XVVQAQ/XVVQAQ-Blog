@@ -19,17 +19,37 @@ const { page } = Astro.props;
     pageDescription="All blog posts"
     data-pagefind-ignore
 >
-    {
-        page.data.length === 0 ? (
-            <p class="empty-state">No posts available yet. Check back soon!</p>
-        ) : (
-            <PostPage {page} />
-        )
-    }
-    <Pagination
-        prevUrl={page.url.prev ?? undefined}
-        nextUrl={page.url.next ?? undefined}
-        currentPage={page.currentPage}
-        totalPages={page.lastPage}
-    />
+    <div class="page-content">
+        {
+            page.data.length === 0 ? (
+                <p class="empty-state">
+                    No posts available yet. Check back soon!
+                </p>
+            ) : (
+                <PostPage {page} />
+            )
+        }
+        <Pagination
+            prevUrl={page.url.prev ?? undefined}
+            nextUrl={page.url.next ?? undefined}
+            currentPage={page.currentPage}
+            totalPages={page.lastPage}
+        />
+    </div>
 </Layout>
+
+<style>
+    :global(.page-content) {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    :global(.page-content > :first-child) {
+        flex: 1;
+    }
+
+    :global(.page-content > .pagination) {
+        margin-top: auto;
+    }
+</style>
