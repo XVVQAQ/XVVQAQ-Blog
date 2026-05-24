@@ -162,18 +162,16 @@
 
     .search-dialog {
         border: none;
-        border-radius: 0;
+        border-radius: var(--radius-xs);
         padding: 0;
-        width: min(560px, 90vw);
-        max-height: 70vh;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        width: min(480px, 90vw);
+        max-height: 65vh;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.15);
         overflow: hidden;
         opacity: 0;
-        transform: scale(0.9) translateY(-30px);
-        transition:
-            opacity 0.25s ease-out,
-            transform 0.25s ease-out;
-        background-color: var(--bg-color);
+        transform: scale(0.95) translateY(-12px);
+        transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+        background: var(--bg-color);
         color: var(--text-color);
     }
 
@@ -184,24 +182,24 @@
 
     .search-dialog::backdrop {
         background: rgba(0, 0, 0, 0);
-        transition: background 0.25s ease-out;
+        transition: background 0.2s ease-out;
     }
 
     .search-dialog.open::backdrop {
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.3);
     }
 
     .search-container {
         display: flex;
         flex-direction: column;
-        max-height: 70vh;
+        max-height: 65vh;
     }
 
     .search-header {
         display: flex;
         align-items: center;
         border-bottom: 1px solid var(--border-color);
-        padding: 0.75rem 1rem;
+        padding: 0.5rem 0.75rem;
         gap: 0.5rem;
     }
 
@@ -209,29 +207,30 @@
         flex: 1;
         border: none;
         outline: none;
-        font-size: 1rem;
-        padding: 0.25rem 0;
+        font-size: 0.9rem;
+        padding: 0.35rem 0;
         background: none;
         color: var(--text-color);
     }
 
     .search-input::placeholder {
-        color: var(--text-color);
-        opacity: 0.5;
+        color: var(--text-secondary);
     }
 
     .close-btn {
         background: none;
         border: none;
-        font-size: 1.1rem;
+        font-size: 1rem;
         cursor: pointer;
-        color: var(--text-color);
+        color: var(--text-secondary);
         padding: 0.25rem;
-        opacity: 0.6;
+        border-radius: var(--radius-xs);
+        transition: background 0.2s, color 0.2s;
     }
 
     .close-btn:hover {
-        opacity: 1;
+        background: var(--surface-color);
+        color: var(--text-color);
     }
 
     .search-results {
@@ -241,21 +240,21 @@
 
     .search-status {
         text-align: center;
-        color: var(--text-color);
-        opacity: 0.6;
-        padding: 2rem 0;
+        color: var(--text-secondary);
+        padding: 2.5rem 0;
         margin: 0;
+        font-size: 0.85rem;
     }
 
     .result-item {
         display: flex;
         flex-direction: column;
-        gap: 0.2rem;
-        padding: 0.75rem 1rem;
+        gap: 0.15rem;
+        padding: 0.65rem 0.75rem;
         text-decoration: none;
         color: inherit;
-        transition: background 0.15s;
         border-bottom: 1px solid var(--border-color);
+        transition: background 0.15s;
     }
 
     .result-item:last-child {
@@ -263,42 +262,45 @@
     }
 
     .result-item:hover {
-        background: rgba(0, 0, 0, 0.05);
-    }
-
-    :global([data-theme="dark"]) .result-item:hover {
-        background: rgba(255, 255, 255, 0.05);
+        background: var(--surface-color);
     }
 
     .result-title {
         font-weight: 600;
-        font-size: 0.95rem;
+        font-size: 0.9rem;
         color: var(--text-color);
     }
 
     .result-excerpt {
-        font-size: 0.85rem;
-        color: var(--text-color);
-        opacity: 0.7;
-        line-height: 1.4;
+        font-size: 0.8rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
     :global(.result-excerpt mark) {
-        background: #fef08a;
-        color: inherit;
-        border-radius: 2px;
-        padding: 0 1px;
+        background: transparent;
+        color: var(--link-color);
+        font-weight: 600;
     }
 
     .search-footer {
         border-top: 1px solid var(--border-color);
-        padding: 0.5rem 1rem;
+        padding: 0.4rem 0.75rem;
         display: flex;
         justify-content: flex-end;
     }
 
     .powered-by {
-        font-size: 0.75rem;
-        color: var(--text-color);
+        font-size: 0.7rem;
+        color: var(--text-secondary);
+        opacity: 0.6;
+
+        a {
+            color: var(--text-secondary);
+        }
     }
 </style>
