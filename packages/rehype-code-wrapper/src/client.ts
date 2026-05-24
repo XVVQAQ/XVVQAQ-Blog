@@ -122,6 +122,7 @@ function init() {
     // --- Header ---
     const header = document.createElement("div");
     header.className = "code-header";
+    header.setAttribute("data-pagefind-ignore", "");
 
     // Icon — injected as inline SVG
     const iconSpan = document.createElement("span");

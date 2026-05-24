@@ -126,7 +126,7 @@ const {
     });
 </script>
 
-<style>
+<style lang="scss">
     .post-card {
         position: relative;
         border: 1px solid var(--border-color);
@@ -138,31 +138,31 @@ const {
             background-color 0.3s,
             border-color 0.3s;
         cursor: pointer;
-    }
 
-    .post-card h2 {
-        margin-bottom: 0.5rem;
-        margin-top: 0;
-        color: var(--text-color);
-    }
+        h2 {
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+            color: var(--text-color);
+        }
 
-    .post-card p {
-        color: var(--text-color);
-    }
+        p {
+            color: var(--text-color);
+        }
 
-    .post-card a {
-        text-decoration: none;
-        color: var(--text-color);
-        transition: color 0.2s;
-    }
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.2s;
 
-    .post-card a:hover {
-        color: var(--link-color);
-    }
+            &:hover {
+                color: var(--link-color);
+            }
+        }
 
-    .post-card:focus-visible {
-        outline: 2px solid oklch(70.4% 0.191 22.216);
-        outline-offset: 3px;
+        &:focus-visible {
+            outline: 2px solid oklch(70.4% 0.191 22.216);
+            outline-offset: 3px;
+        }
     }
 
     .dates {
@@ -177,11 +177,11 @@ const {
         gap: 0.25rem;
         color: var(--text-color);
         opacity: 0.8;
-    }
 
-    .date-item svg {
-        width: 16px;
-        height: 16px;
+        svg {
+            width: 16px;
+            height: 16px;
+        }
     }
 
     .pin-badge {

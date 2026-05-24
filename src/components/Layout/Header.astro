@@ -28,10 +28,9 @@ const { SITE_TITLE } = config.site;
     </div>
 </header>
 
-<style scoped>
+<style scoped lang="scss">
     .header {
         display: flex;
-        justify-content: space-between;
         width: 100%;
         align-items: center;
         justify-content: center;
@@ -40,21 +39,16 @@ const { SITE_TITLE } = config.site;
         transition:
             background-color 0.3s,
             border-color 0.3s;
-    }
-    .container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        max-width: 30rem;
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 30rem;
+        }
     }
 
-    .nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 2rem;
-    }
     .site-title {
         font-size: 1rem;
         font-weight: bold;
@@ -65,20 +59,29 @@ const { SITE_TITLE } = config.site;
         transition: color 0.2s;
     }
 
-    .nav-links {
-        list-style: none;
+    .nav {
         display: flex;
-        gap: 1rem;
-        margin: 0;
-        padding: 0;
-    }
-    .nav-links a {
-        text-decoration: none;
-        color: var(--text-color);
-        transition: color 0.2s;
-    }
-    .nav-links a:hover {
-        color: var(--link-color);
+        justify-content: space-between;
+        align-items: center;
+        gap: 2rem;
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 1rem;
+            margin: 0;
+            padding: 0;
+
+            a {
+                text-decoration: none;
+                color: var(--text-color);
+                transition: color 0.2s;
+
+                &:hover {
+                    color: var(--link-color);
+                }
+            }
+        }
     }
 
     .buttons {
@@ -106,10 +109,10 @@ const { SITE_TITLE } = config.site;
             order: 3;
             margin-top: 1rem;
             margin-bottom: 0.2rem;
-        }
 
-        .nav-links {
-            justify-content: flex-start;
+            .nav-links {
+                justify-content: flex-start;
+            }
         }
     }
 </style>

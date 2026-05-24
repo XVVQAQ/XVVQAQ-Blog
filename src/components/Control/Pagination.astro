@@ -52,7 +52,7 @@ function getPageUrl(pageNum: number): string {
 }
 ---
 
-<nav class="pagination" aria-label="Pagination">
+<nav class="pagination" aria-label="Pagination" data-pagefind-ignore>
     <a
         href={prevUrl}
         class="pagination-btn"
@@ -117,56 +117,57 @@ function getPageUrl(pageNum: number): string {
     </a>
 </nav>
 
-<style scoped>
+<style scoped lang="scss">
+    $pagination-size: 2.4rem;
+    $pagination-border: #d3d3d3;
+
     .pagination {
         display: flex;
         justify-content: center;
         align-items: center;
         margin-top: 1.5rem;
         padding: 0.5rem 0;
-        --pagination-border: #d3d3d3;
-        --pagination-size: 2.4rem;
-    }
 
-    .pagination > * {
-        border: 2px solid var(--pagination-border);
-        margin-left: -2px;
-    }
-    .pagination > *:first-child {
-        margin-left: 0;
+        > * {
+            border: 2px solid $pagination-border;
+            margin-left: -2px;
+
+            &:first-child {
+                margin-left: 0;
+            }
+        }
     }
 
     .pagination-btn {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0;
-        padding: 0;
-        width: var(--pagination-size);
-        height: var(--pagination-size);
+        width: $pagination-size;
+        height: $pagination-size;
         background-color: transparent;
         color: var(--text-color);
         text-decoration: none;
         font-weight: 500;
-        transition: all 0.2s;
         font-size: 0.95rem;
         position: relative;
-    }
+        transition: all 0.2s;
 
-    .pagination-btn:hover:not(.disabled) {
-        background-color: var(--text-color);
-        color: var(--bg-color);
-        z-index: 1;
-    }
+        &:hover:not(.disabled) {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            z-index: 1;
+        }
 
-    .pagination-btn.disabled {
-        color: #b0b0b0;
-        opacity: 0.5;
-        cursor: not-allowed;
-        pointer-events: none;
-    }
-    .pagination-btn.disabled svg {
-        stroke: currentColor;
+        &.disabled {
+            color: #b0b0b0;
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+
+            svg {
+                stroke: currentColor;
+            }
+        }
     }
 
     .pagination-numbers {
@@ -175,48 +176,50 @@ function getPageUrl(pageNum: number): string {
         margin: 0 !important;
     }
 
-    .pagination-number,
-    .pagination-ellipsis {
+    .pagination-number {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: var(--pagination-size);
-        height: var(--pagination-size);
-        padding: 0;
+        width: $pagination-size;
+        height: $pagination-size;
         background-color: transparent;
         color: var(--text-color);
         text-decoration: none;
-        border-top: 2px solid var(--pagination-border);
-        border-bottom: 2px solid var(--pagination-border);
-        border-left: 2px solid var(--pagination-border);
+        border-top: 2px solid $pagination-border;
+        border-bottom: 2px solid $pagination-border;
+        border-left: 2px solid $pagination-border;
         border-right: none;
         font-weight: 500;
-        transition: all 0.2s;
+        font-size: 0.95rem;
         margin: 0;
         margin-left: -2px;
-        font-size: 0.95rem;
+        transition: all 0.2s;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:last-child {
+            border-right: 2px solid $pagination-border;
+        }
+
+        &:hover {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            z-index: 1;
+        }
+
+        &.active {
+            background-color: var(--text-color);
+            color: var(--bg-color);
+            cursor: default;
+            z-index: 1;
+        }
     }
 
-    .pagination-number:first-child,
-    .pagination-ellipsis:first-child {
-        margin-left: 0;
-    }
-
-    .pagination-number:last-child,
-    .pagination-ellipsis:last-child {
-        border-right: 2px solid var(--pagination-border);
-    }
-
-    .pagination-number:hover {
-        background-color: var(--text-color);
-        color: var(--bg-color);
-        z-index: 1;
-    }
-
-    .pagination-number.active {
-        background-color: var(--text-color);
-        color: var(--bg-color);
+    .pagination-ellipsis {
+        @extend .pagination-number;
+        border-right: 2px solid $pagination-border;
         cursor: default;
-        z-index: 1;
     }
 </style>

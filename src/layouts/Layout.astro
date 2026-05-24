@@ -19,11 +19,11 @@ const { pageTitle, pageDescription, tags = [] } = Astro.props;
     <body>
         <Header />
         <main>
-            <aside>
+            <aside data-pagefind-ignore>
                 <slot name="LSide" />
             </aside>
             <slot />
-            <aside>
+            <aside data-pagefind-ignore>
                 <slot name="RSide" />
             </aside>
         </main>

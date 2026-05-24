@@ -23,7 +23,7 @@ const uniqueTags = [...new Set(tags.filter((t) => typeof t === "string"))]
     )
 }
 
-<style>
+<style lang="scss">
     .tag-list {
         display: flex;
         flex-wrap: wrap;
@@ -38,7 +38,6 @@ const uniqueTags = [...new Set(tags.filter((t) => typeof t === "string"))]
         padding: 0.15rem 0.5rem;
         border: 1px solid var(--border-color);
         border-radius: var(--tag-radius);
-        position: relative;
         text-decoration: none;
         color: var(--text-color);
         opacity: 0.85;
@@ -47,10 +46,10 @@ const uniqueTags = [...new Set(tags.filter((t) => typeof t === "string"))]
             color 0.2s,
             opacity 0.2s;
         font-size: 0.9rem;
-    }
 
-    .tag:hover {
-        opacity: 1;
-        background: var(--border-color);
+        &:hover {
+            opacity: 1;
+            background: var(--border-color);
+        }
     }
 </style>

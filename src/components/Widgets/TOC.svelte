@@ -148,7 +148,7 @@
 </script>
 
 {#if hasContent}
-  <div class="toc-wrapper">
+  <div class="toc-wrapper" data-pagefind-ignore>
     <div class="toc-sticky">
       <div class="toc-title">{title}</div>
       <nav class="toc-nav">
