@@ -1,0 +1,21 @@
+// ── Shared Webkit Scrollbar Styles ──
+%scrollbar {
+    &::-webkit-scrollbar {
+        width: var(--scrollbar-size);
+        height: var(--scrollbar-size);
+    }
+    &::-webkit-scrollbar-track {
+        background: var(--scrollbar-track);
+    }
+    &::-webkit-scrollbar-thumb {
+        background: var(--scrollbar-thumb);
+        border-radius: 999px;
+        border: 2px solid var(--scrollbar-track);
+    }
+    &::-webkit-scrollbar-thumb:hover {
+        background: var(--scrollbar-thumb-hover);
+    }
+    &::-webkit-scrollbar-corner {
+        background: var(--scrollbar-track);
+    }
+}

@@ -3,7 +3,7 @@ import { type CollectionEntry, getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import TOC from "@/components/Widgets/TOC.svelte";
 import PostHeader from "@/components/Misc/PostHeader.astro";
-import "@/styles/markdown.css";
+import "@/styles/markdown.scss";
 
 export async function getStaticPaths() {
     const posts = await getCollection("blog");

@@ -1,0 +1,31 @@
+// ── Shared Values ──
+$font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+
+$transition-default: 0.2s;
+
+// ── Mixins ──
+@mixin heading-anchor-effect {
+    position: relative;
+    scroll-margin-top: var(--post-layout-top-offset);
+    display: inline-block;
+    cursor: pointer;
+    transition: color $transition-default;
+
+    &::before {
+        content: "#";
+        position: absolute;
+        left: -1.5rem;
+        opacity: 0;
+        color: oklch(70.4% 0.191 22.216);
+        transition: opacity $transition-default;
+    }
+
+    &:hover {
+        color: oklch(70.4% 0.191 22.216);
+
+        &::before {
+            opacity: 1;
+        }
+    }
+}
