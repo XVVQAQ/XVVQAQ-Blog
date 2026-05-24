@@ -32,24 +32,24 @@ const uniqueTags = [...new Set(tags.filter((t) => typeof t === "string"))]
     }
 
     .tag {
-        --tag-radius: var(--radius-sm);
+        --tag-radius: var(--radius-xs);
         display: inline-flex;
         align-items: center;
-        padding: 0.15rem 0.5rem;
+        padding: 0.2rem 0.55rem;
         border: 1px solid var(--border-color);
         border-radius: var(--tag-radius);
         text-decoration: none;
-        color: var(--text-color);
-        opacity: 0.85;
+        color: var(--text-secondary);
+        font-size: 0.8rem;
         transition:
             border-color 0.2s,
             color 0.2s,
-            opacity 0.2s;
-        font-size: 0.9rem;
+            background 0.2s;
 
         &:hover {
-            opacity: 1;
-            background: var(--border-color);
+            color: var(--link-color);
+            border-color: var(--link-color);
+            background: transparent;
         }
     }
 </style>

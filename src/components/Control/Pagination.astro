@@ -144,21 +144,13 @@ function getPageUrl(pageNum: number): string {
         justify-content: center;
         align-items: center;
         margin-top: 1.5rem;
-        padding: 0.5rem 0;
+        padding: 0.75rem 0;
+        gap: 0.25rem;
 
-        // Collapsed border: each item has a border, adjacent items share it via margin
         > * {
-            border: 2px solid var(--border-color);
-            margin-left: -2px;
-
-            &:first-child {
-                margin-left: 0;
-                border-radius: var(--radius-sm) 0 0 var(--radius-sm);
-            }
-
-            &:last-child {
-                border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-            }
+            margin: 0;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-xs);
         }
     }
 

@@ -141,21 +141,23 @@
         background: none;
         border: none;
         cursor: pointer;
-        padding: 0.5rem;
-        display: flex;
+        padding: 0.35rem;
+        display: inline-flex;
         align-items: center;
         justify-content: center;
-        border-radius: 0.5rem;
-        transition: background-color 0.2s;
-        color: var(--text-color);
+        border-radius: var(--radius-xs);
+        transition: background 0.2s;
+        color: var(--text-secondary);
     }
 
     .search-trigger:hover {
-        background-color: rgba(0, 0, 0, 0.1);
+        background: var(--surface-color);
+        color: var(--text-color);
     }
 
-    :global([data-theme="dark"]) .search-trigger:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+    .search-trigger svg {
+        width: 18px;
+        height: 18px;
     }
 
     .search-dialog {

@@ -40,25 +40,24 @@
         background: none;
         border: none;
         cursor: pointer;
-        padding: 0.5rem;
+        padding: 0.35rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 0.5rem;
-        transition: background-color 0.2s;
-        color: var(--text-color);
+        border-radius: var(--radius-xs);
+        transition: background 0.2s;
+        color: var(--text-secondary);
     }
 
     #theme-toggle:hover {
-        background-color: rgba(0, 0, 0, 0.1);
-    }
-
-    :global([data-theme="dark"]) #theme-toggle:hover {
-        background-color: rgba(255, 255, 255, 0.1);
+        background: var(--surface-color);
+        color: var(--text-color);
     }
 
     .sun-icon,
     .moon-icon {
+        width: 18px;
+        height: 18px;
         transition: opacity 0.2s;
     }
 

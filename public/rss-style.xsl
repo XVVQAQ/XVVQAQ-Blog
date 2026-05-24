@@ -21,101 +21,104 @@
           }
 
           :root {
-            --page-bg: #f5f5f5;
+            --page-bg: #f0f0f0;
             --bg-color: #ffffff;
             --text-color: #1a1a1a;
-            --muted-color: rgba(26, 26, 26, 0.72);
-            --border-color: rgba(26, 26, 26, 0.12);
-            --link-color: #2563eb;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --surface-color: #f5f5f5;
+            --link-color: #1976d2;
+            --radius-xs: 4px;
+            --elevation-1: 0 1px 3px rgba(0,0,0,0.08);
+            --elevation-2: 0 2px 8px rgba(0,0,0,0.06);
           }
 
           @media (prefers-color-scheme: dark) {
             :root {
-              --page-bg: #0b0d12;
-              --bg-color: #0f131a;
-              --text-color: rgba(255, 255, 255, 0.92);
-              --muted-color: rgba(255, 255, 255, 0.72);
-              --border-color: rgba(255, 255, 255, 0.14);
-              --link-color: #7aa2ff;
+              --page-bg: #0d0d0d;
+              --bg-color: #121212;
+              --text-color: #e4e4e4;
+              --text-secondary: #999999;
+              --border-color: #333333;
+              --surface-color: #1e1e1e;
+              --link-color: #64b5f6;
             }
           }
 
           body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background: var(--page-bg);
           }
 
           .container {
-            max-width: 800px;
+            max-width: 48rem;
             margin: 0 auto;
-            padding: 20px;
+            padding: 1.5rem 1rem;
           }
 
           .header {
             background: var(--bg-color);
-            padding: 40px;
-            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border-color);
+            padding: 2.5rem 1.5rem;
             text-align: center;
           }
 
           .header h1 {
-            font-size: 2.2em;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
             color: var(--text-color);
-            line-height: 1.25;
+            letter-spacing: -0.02em;
           }
 
           .header p {
-            color: var(--muted-color);
-            font-size: 1.05em;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
           }
 
           .posts {
-            background: var(--bg-color);
-            padding: 24px;
+            margin-top: 1.5rem;
           }
 
           .posts h2 {
-            font-size: 1.5em;
-            margin-bottom: 16px;
-            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            padding: 0 0.25rem;
           }
 
           .post-list {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 0.75rem;
           }
 
-          /* PostCard-ish */
           .post-card {
-            position: relative;
+            display: block;
             border: 1px solid var(--border-color);
-            padding: 1rem;
-            border-radius: 8px;
-            background-color: var(--bg-color);
-            transition:
-              background-color 0.3s,
-              border-color 0.3s,
-              transform 0.12s ease-in-out;
-            cursor: pointer;
-            color: inherit;
+            padding: 1rem 1.25rem;
+            border-radius: var(--radius-xs);
+            background: var(--bg-color);
+            box-shadow: var(--elevation-1);
             text-decoration: none;
+            color: inherit;
+            transition: box-shadow 0.2s, border-color 0.2s;
           }
 
           .post-card:hover {
-            border-color: rgba(127, 127, 127, 0.35);
-            transform: translateY(-1px);
+            box-shadow: var(--elevation-2);
+            border-color: var(--link-color);
           }
 
           .post-card h3 {
-            margin-bottom: 0.5rem;
-            margin-top: 0;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.35rem;
             color: var(--text-color);
-            font-size: 1.2rem;
-            line-height: 1.35;
+            line-height: 1.4;
           }
 
           .post-card:hover h3 {
@@ -123,19 +126,32 @@
           }
 
           .post-card p {
-            color: var(--muted-color);
-            margin-bottom: 0.75rem;
-            line-height: 1.7;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
           }
 
-          .post-card:focus-visible {
-            outline: 2px solid oklch(70.4% 0.191 22.216);
-            outline-offset: 3px;
+          .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-bottom: 0.5rem;
+          }
+
+          .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.15rem 0.5rem;
+            border-radius: var(--radius-xs);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            font-size: 0.8rem;
           }
 
           .dates {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem;
             flex-wrap: wrap;
           }
 
@@ -143,50 +159,32 @@
             display: inline-flex;
             align-items: center;
             gap: 0.25rem;
-            color: var(--muted-color);
-            opacity: 0.9;
-            font-size: 0.9em;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            opacity: 0.8;
           }
 
           .date-item svg {
-            width: 16px;
-            height: 16px;
-            flex: 0 0 auto;
+            width: 14px;
+            height: 14px;
+            flex-shrink: 0;
           }
 
-          .tag-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.4rem;
-            margin-bottom: 0.75rem;
-          }
-
-          .tag {
-            display: inline-flex;
-            align-items: center;
-            padding: 0.15rem 0.5rem;
-            border-radius: 999px;
-            border: 1px solid var(--border-color);
-            color: var(--muted-color);
-            font-size: 0.85em;
-            background: rgba(127, 127, 127, 0.08);
-          }
-
-          @media (max-width: 768px) {
+          @media (max-width: 480px) {
             .container {
-              padding: 10px;
+              padding: 0.75rem 0.5rem;
             }
 
             .header {
-              padding: 20px;
+              padding: 1.5rem 1rem;
             }
 
             .header h1 {
-              font-size: 1.6em;
+              font-size: 1.4rem;
             }
 
-            .posts {
-              padding: 18px;
+            .post-card {
+              padding: 0.75rem 1rem;
             }
           }
         </style>
@@ -244,23 +242,10 @@
       <div class="dates">
         <xsl:if test="pubDate">
           <small class="date-item">
-            <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                        >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
               <g fill="none">
-                <path
-                                    fill="currentColor"
-                                    d="M2 9c0-1.886 0-2.828.586-3.414S4.114 5 6 5h12c1.886 0 2.828 0 3.414.586S22 7.114 22 9c0 .471 0 .707-.146.854C21.707 10 21.47 10 21 10H3c-.471 0-.707 0-.854-.146C2 9.707 2 9.47 2 9m0 9c0 1.886 0 2.828.586 3.414S4.114 22 6 22h12c1.886 0 2.828 0 3.414-.586S22 19.886 22 18v-5c0-.471 0-.707-.146-.854C21.707 12 21.47 12 21 12H3c-.471 0-.707 0-.854.146C2 12.293 2 12.53 2 13z"
-                                />
-                <path
-                                    stroke="currentColor"
-                                    stroke-linecap="round"
-                                    stroke-width="2"
-                                    d="M7 3v3m10-3v3"
-                                />
+                <path fill="currentColor" d="M2 9c0-1.886 0-2.828.586-3.414S4.114 5 6 5h12c1.886 0 2.828 0 3.414.586S22 7.114 22 9c0 .471 0 .707-.146.854C21.707 10 21.47 10 21 10H3c-.471 0-.707 0-.854-.146C2 9.707 2 9.47 2 9m0 9c0 1.886 0 2.828.586 3.414S4.114 22 6 22h12c1.886 0 2.828 0 3.414-.586S22 19.886 22 18v-5c0-.471 0-.707-.146-.854C21.707 12 21.47 12 21 12H3c-.471 0-.707 0-.854.146C2 12.293 2 12.53 2 13z"/>
+                <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="M7 3v3m10-3v3"/>
               </g>
             </svg>
             <xsl:text>发布: </xsl:text>
@@ -270,16 +255,8 @@
 
         <xsl:if test="atom:updated">
           <small class="date-item">
-            <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                        >
-              <path
-                                fill="currentColor"
-                                d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m4.2 14.2L11 13V7h1.5v5.2l4.5 2.7z"
-                            />
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2m4.2 14.2L11 13V7h1.5v5.2l4.5 2.7z"/>
             </svg>
             <xsl:text>更新: </xsl:text>
             <xsl:value-of select="atom:updated" />
