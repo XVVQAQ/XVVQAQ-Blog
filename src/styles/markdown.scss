@@ -54,7 +54,7 @@ main {
     // Code blocks
     pre.astro-code {
         border: 1px solid var(--code-border);
-        border-radius: 0.75rem;
+        border-radius: var(--radius-lg);
         padding: 1rem;
         font-size: 0.9rem;
         line-height: 1.6;

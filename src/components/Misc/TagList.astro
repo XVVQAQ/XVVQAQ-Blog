@@ -32,7 +32,7 @@ const uniqueTags = [...new Set(tags.filter((t) => typeof t === "string"))]
     }
 
     .tag {
-        --tag-radius: 6px;
+        --tag-radius: var(--radius-sm);
         display: inline-flex;
         align-items: center;
         padding: 0.15rem 0.5rem;
