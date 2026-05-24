@@ -1,0 +1,12 @@
+{
+  "name": "@xvvqaq/rehype-code-wrapper",
+  "type": "module",
+  "version": "0.0.0",
+  "private": true,
+  "exports": {
+    ".": "./src/rehype-code-wrapper.ts",
+    "./languages": "./src/languages.ts",
+    "./styles.css": "./src/styles.css",
+    "./client": "./src/client.ts"
+  }
+}
