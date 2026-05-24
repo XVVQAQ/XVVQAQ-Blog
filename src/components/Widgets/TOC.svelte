@@ -184,17 +184,17 @@
 {/if}
 
 <style>
-  .toc-wrapper { font-size: 0.8125rem; line-height: 1.6; }
+  .toc-wrapper { font-size: 0.8125rem; line-height: 1.5; }
   .toc-sticky { position: sticky; top: 1.5rem; }
   .toc-title {
-    font-weight: 600; margin-bottom: 0.5rem; font-size: 0.75rem;
-    text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.6;
+    font-weight: 600; margin-bottom: 0.5rem; font-size: 0.7rem;
+    text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary);
   }
   .toc-nav { position: relative; }
   .toc-indicator {
     display: none;
     position: absolute; left: 0; width: 2px;
-    background: var(--link-color); border-radius: 2px;
+    background: var(--link-color); border-radius: var(--radius-xs);
     transition: top 0.15s ease, height 0.15s ease;
     pointer-events: none; z-index: 1;
   }
@@ -203,14 +203,19 @@
   }
   .toc-list li { margin: 0; padding: 0; }
   .toc-list a {
-    display: block; padding: 0.2rem 0; padding-left: 0.75rem;
-    border-left: 2px solid transparent; color: var(--text-color);
-    text-decoration: none; opacity: 0.5;
-    transition: opacity 0.2s, border-color 0.2s;
+    display: block; padding: 0.15rem 0; padding-left: 0.6rem;
+    border-left: 2px solid transparent;
+    color: var(--text-secondary);
+    text-decoration: none; font-size: 0.8rem;
+    transition: color 0.2s, border-color 0.2s;
     position: relative; z-index: 2;
   }
-  .toc-list a:hover { opacity: 0.8; }
-  .toc-list a.active { opacity: 1; color: var(--link-color); border-left-color: var(--link-color); }
-  :global(.depth-3 a) { padding-left: 1.5rem !important; }
-  :global(.depth-4 a) { padding-left: 2.25rem !important; }
+  .toc-list a:hover {
+    color: var(--text-color);
+  }
+  .toc-list a.active {
+    color: var(--link-color); border-left-color: var(--link-color);
+  }
+  :global(.depth-3 a) { padding-left: 1.25rem !important; }
+  :global(.depth-4 a) { padding-left: 1.9rem !important; }
 </style>
