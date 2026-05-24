@@ -20,15 +20,15 @@ function normalizeTagKey(tag: string) {
 }
 
 export function tagKeyToSlug(tagKey: string) {
-  return encodeURIComponent(tagKey);
+  return tagKey;
 }
 
 export function tagSlugToKey(tagSlug: string) {
-  return decodeURIComponent(tagSlug);
+  return tagSlug;
 }
 
 export function tagLabelToSlug(tagLabel: string) {
-  return tagKeyToSlug(normalizeTagKey(tagLabel));
+  return normalizeTagKey(tagLabel);
 }
 
 export async function getTagIndex() {

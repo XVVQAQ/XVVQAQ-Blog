@@ -13,6 +13,9 @@ import svelte from "@astrojs/svelte";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 
+import expressiveCode from "astro-expressive-code";
+import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.xvvqaq.top",
@@ -26,7 +29,7 @@ export default defineConfig({
   },
 
   markdown: {
-    syntaxHighlight: { type: "shiki", excludeLangs: ["math"] },
+    syntaxHighlight: false,
     shikiConfig: { theme: "github-dark", wrap: true },
     remarkPlugins: /** @type {import("astro").RemarkPlugins} */ ([
       remarkMath,
@@ -43,8 +46,26 @@ export default defineConfig({
         rehypeExternalLinks,
         { target: "_blank", rel: ["noopener", "noreferrer"] },
       ],
+      // rehypeCodeWrapper, // removed — Expressive Code handles code blocks
     ]),
   },
 
-  integrations: [svelte(), sitemap(), mdx()],
+  integrations: [
+    svelte(),
+    sitemap(),
+    expressiveCode({
+      themes: ["github-dark", "github-light"],
+
+      plugins: [pluginLineNumbers()],
+
+      useThemedScrollbars: true,
+      useDarkModeMediaQuery: false,
+      themeCssSelector: (theme) => `[data-theme='${theme.type}']`,
+
+      defaultProps: {
+        wrap: true,
+      },
+    }),
+    mdx(),
+  ],
 });

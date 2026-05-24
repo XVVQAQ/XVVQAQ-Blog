@@ -85,48 +85,6 @@ const keywords = [...defaultKeywords, ...tagKeywords]
                 );
             });
         })();
-
-        const codeBlocks = document.querySelectorAll("pre.astro-code");
-        codeBlocks.forEach((block) => {
-            if (block.querySelector(".code-copy-button")) return;
-
-            const button = document.createElement("button");
-            button.type = "button";
-            button.className = "code-copy-button";
-            button.textContent = "复制";
-            button.setAttribute("aria-label", "复制代码");
-
-            let resetTimer = 0;
-            button.addEventListener("click", async () => {
-                const code = block.querySelector("code")?.textContent ?? "";
-
-                try {
-                    await navigator.clipboard.writeText(code);
-                    button.classList.add("is-copied");
-                    button.textContent = "已复制";
-                } catch {
-                    const textarea = document.createElement("textarea");
-                    textarea.value = code;
-                    textarea.setAttribute("readonly", "");
-                    textarea.style.position = "absolute";
-                    textarea.style.left = "-9999px";
-                    document.body.appendChild(textarea);
-                    textarea.select();
-                    document.execCommand("copy");
-                    textarea.remove();
-                    button.classList.add("is-copied");
-                    button.textContent = "已复制";
-                }
-
-                window.clearTimeout(resetTimer);
-                resetTimer = window.setTimeout(() => {
-                    button.classList.remove("is-copied");
-                    button.textContent = "复制";
-                }, 2000);
-            });
-
-            block.appendChild(button);
-        });
     </script>
 
     <meta charset="utf-8" />
@@ -185,6 +143,10 @@ const keywords = [...defaultKeywords, ...tagKeywords]
         integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV"
         crossorigin="anonymous"
     />
+
+    <script>
+        import "../../packages/codeblocks/src/client.ts";
+    </script>
 
     <ClientRouter />
 </head>
