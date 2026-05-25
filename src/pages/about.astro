@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
+import Giscus from "@/components/Widgets/Giscus.svelte";
 
 const [aboutEntry] = await getCollection("pages");
 if (!aboutEntry) {
@@ -14,6 +15,7 @@ const { Content } = await render(aboutEntry);
     <aside class="spacer" slot="LSide"></aside>
     <article class="about-content">
         <Content />
+        <Giscus client:load />
     </article>
     <aside class="spacer" slot="RSide"></aside>
 </Layout>
