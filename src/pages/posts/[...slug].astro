@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
+import Giscus from "@/components/Widgets/Giscus.svelte";
 import TOC from "@/components/Widgets/TOC.svelte";
 import PostHeader from "@/components/Misc/PostHeader.astro";
 import "@/styles/markdown.scss";
@@ -35,6 +36,7 @@ const { Content, headings } = await render(post);
             transitionKey={post.id}
         />
         <Content />
+        <Giscus client:load />
     </article>
     <aside class="toc-sidebar" slot="RSide">
         <TOC headings={headings} title={post.data.title} client:load />

@@ -9,6 +9,13 @@ interface Config {
   page: {
     PAGE_SIZE: number;
   };
+  giscus?: {
+    repo: string;
+    repoId: string;
+    category: string;
+    categoryId: string;
+    mapping?: string;
+  };
 }
 
 export const config: Config = {
@@ -21,5 +28,12 @@ export const config: Config = {
   },
   page: {
     PAGE_SIZE: 10,
+  },
+  giscus: {
+    repo: "XVVQAQ/XVVQAQ-Blog",
+    repoId: "R_kgDORVr0Rg",
+    category: "General",
+    categoryId: "DIC_kwDORVr0Rs4C90Y9",
+    mapping: "og:title",
   },
 };
