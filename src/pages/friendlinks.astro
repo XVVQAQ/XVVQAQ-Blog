@@ -1,0 +1,78 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import FriendCard from "@/components/Misc/FriendCard.svelte";
+import { friendLinks } from "@/friendlink";
+
+const links = friendLinks;
+---
+
+<Layout pageTitle="Friend Links" pageDescription="友情链接">
+    <aside class="spacer" slot="LSide"></aside>
+    <article class="friendlinks-content">
+        <h1>Friend Links</h1>
+
+        {
+            links.length === 0 ? (
+                <p class="empty-state">暂无友链</p>
+            ) : (
+                <div class="friend-grid">
+                    {links.map((link) => (
+                        <FriendCard
+                            avatar={link.avatar}
+                            name={link.name}
+                            url={link.url}
+                            description={link.description}
+                            tags={link.tags}
+                            hoverDescription={link.hoverDescription}
+                        />
+                    ))}
+                </div>
+            )
+        }
+    </article>
+    <aside class="spacer" slot="RSide"></aside>
+</Layout>
+
+<style lang="scss">
+    .friendlinks-content {
+        max-width: 48rem;
+        width: 48rem;
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+    }
+
+    .empty-state {
+        color: var(--text-secondary);
+        text-align: center;
+        padding: 3rem 0;
+        font-size: 0.9rem;
+    }
+
+    .friend-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+
+    @media (max-width: 1024px) {
+        .friend-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .friendlinks-content {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .friend-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
