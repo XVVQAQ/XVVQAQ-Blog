@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import FriendCard from "@/components/Misc/FriendCard.svelte";
 import { friendLinks } from "@/friendlink";
+import Giscus from "@/components/Widgets/Giscus.svelte";
 
 const links = friendLinks;
 ---
@@ -29,6 +30,8 @@ const links = friendLinks;
                 </div>
             )
         }
+
+        <Giscus client:load />
     </article>
     <aside class="spacer" slot="RSide"></aside>
 </Layout>

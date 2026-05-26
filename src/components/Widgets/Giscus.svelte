@@ -7,6 +7,11 @@
     const giscusConfig = config.giscus;
     const enabled = giscusConfig && giscusConfig.repo && giscusConfig.repoId;
 
+    function getTheme(): string {
+        const theme = document.documentElement.getAttribute("data-theme");
+        return theme === "dark" ? "dark" : "light";
+    }
+
     function loadGiscus() {
         if (!container || !enabled) return;
 
@@ -26,7 +31,7 @@
         script.setAttribute("data-reactions-enabled", "1");
         script.setAttribute("data-emit-metadata", "0");
         script.setAttribute("data-input-position", "top");
-        script.setAttribute("data-theme", "preferred_color_scheme");
+        script.setAttribute("data-theme", getTheme());
         script.setAttribute("data-lang", "zh-CN");
         script.setAttribute("data-loading", "lazy");
         script.setAttribute("crossorigin", "anonymous");
@@ -37,8 +42,7 @@
 
     function syncTheme() {
         if (!container || !enabled) return;
-        const theme = document.documentElement.getAttribute("data-theme");
-        const giscusTheme = theme === "dark" ? "dark" : "light";
+        const giscusTheme = getTheme();
 
         const iframe = container.querySelector<HTMLIFrameElement>("iframe");
         if (iframe) {
@@ -75,8 +79,9 @@
 
 <style>
     .giscus-wrapper {
-        margin-top: 2.5rem;
-        padding-top: 1.5rem;
+        margin-top: 3rem;
+        padding-top: 2rem;
+        padding-bottom: 0.5rem;
         border-top: 1px solid var(--border-color);
     }
 </style>
