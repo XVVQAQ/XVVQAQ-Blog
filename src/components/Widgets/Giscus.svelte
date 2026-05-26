@@ -78,7 +78,7 @@
 {/if}
 
 <style>
-    .giscus-wrapper {
+    :global(.giscus-wrapper) {
         margin-top: 3rem;
         padding-top: 2rem;
         padding-bottom: 0.5rem;

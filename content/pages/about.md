@@ -15,5 +15,5 @@ description: 关于本站
  - 略会一点 TypeScript
 
  ## Contact Me
- - <a class="contact-link" href="mailto:XVVQAQ143352@outlook.com" rel="noopener noreferrer">Email</a>
+ - <a class="contact-link" href="mailto:me@xvvqaq.cyou" rel="noopener noreferrer">Email</a>
  - [GitHub](https://github.com/XVVQAQ)
