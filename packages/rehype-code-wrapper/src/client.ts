@@ -46,6 +46,7 @@ const langMap: Record<string, { label: string; icon: string }> = {
   go: { label: "Go", icon: "vscode-icons:file-type-go" },
   cpp: { label: "C++", icon: "vscode-icons:file-type-cpp3" },
   c: { label: "C", icon: "vscode-icons:file-type-c" },
+  slint: { label: "Slint", icon: "vscode-icons:file-type-slint" },
 };
 
 /**

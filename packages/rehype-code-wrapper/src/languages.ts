@@ -100,6 +100,10 @@ export const languages: Record<string, LanguageDef> = {
     label: "C",
     icon: "vscode-icons:file-type-c",
   },
+  slint: {
+    label: "Slint",
+    icon: "vscode-icons:file-type-slint",
+  },
 };
 
 export function getLanguageDef(lang: string): LanguageDef | undefined {
