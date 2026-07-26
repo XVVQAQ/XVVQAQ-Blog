@@ -10,7 +10,7 @@ description: 关于本站
 </span>
 
 ## Me
- - 📕普通高二生📕
+ - 📕普通高三生📕
  - 正在学习 🦀Rust🦀 ...
  - 略会一点 TypeScript
 
