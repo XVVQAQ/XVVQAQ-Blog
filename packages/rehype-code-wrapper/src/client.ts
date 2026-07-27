@@ -145,6 +145,27 @@ function init() {
     fig.parentNode?.insertBefore(frame, fig);
     frame.appendChild(header);
     frame.appendChild(fig);
+
+    // --- Collapse long code blocks ---
+    requestAnimationFrame(() => {
+      const content = frame.querySelector("figure.frame");
+      if (content && content.scrollHeight > 420) {
+        frame.classList.add("collapsible");
+
+        const fade = document.createElement("div");
+        fade.className = "code-fade";
+        frame.appendChild(fade);
+
+        const btn = document.createElement("button");
+        btn.className = "code-expand-btn";
+        btn.textContent = "展开";
+        btn.addEventListener("click", () => {
+          const expanded = frame.classList.toggle("expanded");
+          btn.textContent = expanded ? "收起" : "展开";
+        });
+        frame.appendChild(btn);
+      }
+    });
   });
 }
 
