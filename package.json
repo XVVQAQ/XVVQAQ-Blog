@@ -17,12 +17,12 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^5.0.6",
-    "@astrojs/rss": "^4.0.18",
-    "@astrojs/sitemap": "^3.7.2",
-    "@astrojs/svelte": "^8.1.1",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.3",
+    "@astrojs/svelte": "^8.1.2",
     "@edgeone/astro": "^1.1.5",
     "@expressive-code/plugin-line-numbers": "^0.42.0",
-    "astro": "^6.3.7",
+    "astro": "^6.4.8",
     "astro-expressive-code": "^0.42.0",
     "iconify-icon": "^3.0.2",
     "rehype-accessible-emojis": "^0.3.2",
@@ -32,13 +32,13 @@
     "remark-directive": "^4.0.0",
     "remark-gfm": "^4.0.1",
     "remark-math": "^6.0.0",
-    "svelte": "^5.55.9",
+    "svelte": "^5.56.8",
     "typescript": "^5.9.3",
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^7.7.3",
-    "eslint": "^10.4.0",
+    "eslint": "^10.8.0",
     "pagefind": "^1.5.2",
     "unplugin-icons": "^23.0.1"
   }
