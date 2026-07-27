@@ -79,8 +79,6 @@ importers:
         specifier: ^23.0.1
         version: 23.0.1(@vue/compiler-sfc@3.5.27)(svelte@5.55.9(@typescript-eslint/types@8.59.4))
 
-  packages/codeblocks: {}
-
   packages/rehype-code-wrapper: {}
 
 packages:
